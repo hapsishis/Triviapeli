@@ -1,0 +1,23 @@
+body {
+    text-align: center;
+    background-color: aqua;
+    color: rgb(62, 62, 62);
+}
+
+
+.peli-otsikko {
+    background-color: aquamarine;
+    border-radius:8rem;
+    padding: 1rem;
+    margin: 0 20 rem;
+
+}
+
+
+
+
+.player-card{
+    background-color: aquamarine;
+    border-radius: 8 rem;
+    padding 1 rem;
+}
