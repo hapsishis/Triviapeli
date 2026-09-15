@@ -2,6 +2,7 @@
     <head>
         <title>trivial peli</title>
         <link rel="stylesheet"href= styles.css >
+        <script src="game.js"></script>
     </head>
     <body>
         <header class="peli-otsikko">
@@ -9,7 +10,7 @@
             <h1>trivia peli</h1>
             <p>kerää kaikki kategoriat</p>
         </header>
-        <section>
+        <section class="status-panel">
             <article class="player-card">
                 <h2>sinä</h2>
                 <img src="you.webp" class="player-image">
@@ -20,6 +21,8 @@
                 <p>vuorossa</p>
                 <h2>sinä</h2>
                 <button>Heitä noppaa</button>
+
+                <div id="board" class="board"></div>
             </article>
 
             <article class="player-card">

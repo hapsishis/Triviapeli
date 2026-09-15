@@ -3,7 +3,19 @@ body {
     background-color: aqua;
     color: rgb(62, 62, 62);
 }
+.status-panel {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
 
+
+.board {
+    background: rgb(0, 238, 255);
+    padding: 1rem;
+    border-radius: 1rem;
+}
 
 .peli-otsikko {
     background-color: aquamarine;
