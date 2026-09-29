@@ -1,7 +1,7 @@
 body {
     text-align: center;
-    background-color: aqua;
-    color: rgb(62, 62, 62);
+    background-color:aqua;
+    color: rgb(0, 109, 94);
 }
 .status-panel {
     display: grid;
@@ -12,15 +12,33 @@ body {
 
 
 .board {
-    background: rgb(0, 238, 255);
+    background: rgba(50, 234, 203, 0.709);
     padding: 1rem;
     border-radius: 1rem;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 .space{
-    
+    background: rgb(83, 222, 253);
+    color:rgb(0, 149, 124);
+    padding: 0.3rem;
+    border-radius:0.7rem;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+
+
 }
+
+[data-category="maantieto"]{background: rgb(88, 88, 235);}
+[data-category="yleistieto"]{background: rgb(88, 149, 235);}
+[data-category="historia"]{background: rgb(88, 162, 235);}
+[data-category="taide ja kulttuuri"]{background: rgb(88, 203, 235);}
+[data-category="tiede"]{background: rgb(199, 127, 238);}
+[data-category="urheilu"]{background: rgb(220, 135, 239);}
 .peli-otsikko {
-    background-color: aquamarine;
+    background-color: rgb(127, 255, 234);
     border-radius:8rem;
     padding: 1rem;
     margin: 0 20rem;
