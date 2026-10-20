@@ -7,8 +7,25 @@ const CATEGORIES = [
    { id: "urheilu", name: "urheilu"}
 ];
 
+const gameState = {
+    player: {
+        name: "Player",
+        position: 0,
+        collectedCategories: new Set()
+    },
+    computer: {
+        name: "Tietokone",
+        position: 0,
+        collectedCategories: new Set()
+    },
+    currentTurn: "player"
+};
+
 const BOARD_SIZE= 18;
 const boardElement = document.querySelector("#board");
+const rollButtonElement = document.querySelector("#roll-button");
+const diceBoxElement = document.querySelector("#dice-box");
+rollButtonElement.addEventListener("click", RollDice);
 
 CreateBoard()
 
@@ -51,6 +68,7 @@ function CreateBoard() {
       newSpace.style.gridRow = coordinate.row;
 
       newSpace.dataset.category = category.id;
+      newSpace.dataset.spaceIndex = index;
 
       newSpace.textContent = category.name
 
@@ -61,6 +79,20 @@ function CreateBoard() {
     
 }
 
+function RollDice() {
+    var diceResult = Math.floor(Math.random() * 6) + 1; // Väli: 1-6
+    diceBoxElement.textContent = diceResult;
+    UpdateTokens();
+}
 
 
 
+
+function UpdateTokens(){
+    var currentSpace =document.querySelector(`[data-space-index='${gameState.player.position}']`)
+    var token = document.createElement("token")
+    token.textContent = "P";
+    token.className = "token";
+
+    currentSpace.append(token);
+}
