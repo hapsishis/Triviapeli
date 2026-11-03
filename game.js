@@ -1,10 +1,10 @@
 const CATEGORIES = [
    { id: "maantieto", name: "Maantieto" },
-   { id: "yleistieto", name: "yleistieto" },
+   { id: "luonto", name: "luonto" },
    { id: "historia", name: "historia"},
    { id: "taide ja kulttuuri", name: "taide ja kulttuuri"},
    { id: "tiede", name: "tiede"},
-   { id: "urheilu", name: "urheilu"}
+   { id: "teknologia", name: "teknologia"}
 ];
 
 const gameState = {
@@ -20,11 +20,13 @@ const gameState = {
     },
     currentTurn: "player"
 };
+var API_URL= "https://oma-trivia-api-0f8ffa1eed2e.herokuapp.com/api/questions";
 
 const BOARD_SIZE= 18;
 const boardElement = document.querySelector("#board");
 const rollButtonElement = document.querySelector("#roll-button");
 const diceBoxElement = document.querySelector("#dice-box");
+var playerQuestionText = document.querySelector("#question-text")
 rollButtonElement.addEventListener("click", RollDice);
 
 CreateBoard()
@@ -82,17 +84,48 @@ function CreateBoard() {
 function RollDice() {
     var diceResult = Math.floor(Math.random() * 6) + 1; // Väli: 1-6
     diceBoxElement.textContent = diceResult;
+
+    gameState.player.position = (gameState.player.position + diceResult)% BOARD_SIZE;
     UpdateTokens();
+
+    var currentCategory = [gameState.player.position % CATEGORIES.length]
+    getQuestion(currentCategory.id);
 }
 
 
 
 
 function UpdateTokens(){
+    document.querySelectorAll(".token").forEach((token) =>{
+        token.remove();
+
+    });
+
     var currentSpace =document.querySelector(`[data-space-index='${gameState.player.position}']`)
     var token = document.createElement("token")
     token.textContent = "P";
     token.className = "token";
 
     currentSpace.append(token);
+}
+async function getQuestion(targetCategory){
+    var response = await fetch(API_URL,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "category": targetCategory,
+            "difficulty": "helppo",
+            "ageGroup": "10-12",
+            "count": 1,
+            "language": "suomi"
+        })
+    });
+
+    var data = await response.json();
+    console.log(data)
+    console.log(data[0])
+
+
 }
