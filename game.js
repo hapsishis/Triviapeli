@@ -81,15 +81,17 @@ function CreateBoard() {
     
 }
 
-function RollDice() {
+async function RollDice() {
     var diceResult = Math.floor(Math.random() * 6) + 1; // Väli: 1-6
     diceBoxElement.textContent = diceResult;
 
     gameState.player.position = (gameState.player.position + diceResult)% BOARD_SIZE;
     UpdateTokens();
 
-    var currentCategory = [gameState.player.position % CATEGORIES.length]
-    getQuestion(currentCategory.id);
+   // var currentCategory = CATEGORIES[gameState.player.position % CATEGORIES.length]
+
+   // var questionData = await getQuestion(currentCategory.id);
+    showQuestion(questionData);
 }
 
 
@@ -122,10 +124,18 @@ async function getQuestion(targetCategory){
             "language": "suomi"
         })
     });
-
+if (!response.ok){
+    throw new Error("tapahtui virhe :(")
+}
     var data = await response.json();
-    console.log(data)
-    console.log(data[0])
+    console.log(data);
+    console.log(data[0].question);
+    return data[0];
 
+
+}
+
+function showQuestion (questionData) {
+    playerQuestionText.innerHTML = questionData
 
 }
