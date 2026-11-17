@@ -37,6 +37,7 @@ body {
 [data-category="taide ja kulttuuri"]{background: rgb(88, 203, 235);}
 [data-category="tiede"]{background: rgb(199, 127, 238);}
 [data-category="urheilu"]{background: rgb(220, 135, 239);}
+
 .peli-otsikko {
     background-color: rgb(127, 255, 234);
     border-radius:8rem;

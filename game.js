@@ -20,7 +20,7 @@ const gameState = {
     },
     currentTurn: "player"
 };
-var API_URL= "https://oma-trivia-api-0f8ffa1eed2e.herokuapp.com/api/questions";
+var API_URL= "https://oma-trivia-api-0f8ffa1eed2e.herokuapp.com/api/questionshidinskinki";
 
 const BOARD_SIZE= 18;
 const boardElement = document.querySelector("#board");
@@ -88,6 +88,17 @@ async function RollDice() {
     gameState.player.position = (gameState.player.position + diceResult)% BOARD_SIZE;
     UpdateTokens();
 
+    try{
+      var currentCategory = CATEGORIES[gameState.player.position % CATEGORIES.length]
+      var questionData = await getQuestion(currentCategory.id);
+
+       }
+    
+    catch (error) {
+        playerQuestionText.innerHTML = error;
+
+    }
+
    // var currentCategory = CATEGORIES[gameState.player.position % CATEGORIES.length]
 
    // var questionData = await getQuestion(currentCategory.id);
@@ -124,18 +135,19 @@ async function getQuestion(targetCategory){
             "language": "suomi"
         })
     });
-if (!response.ok){
-    throw new Error("tapahtui virhe :(")
-}
+    if (!response.ok){
+        throw new Error("TAPAHTUI VIRHE YRITÄ MYÖHEMMIN UUDELLEEN :( Error: 303 ")
+    }
     var data = await response.json();
     console.log(data);
-    console.log(data[0].question);
-    return data[0];
+    console.log(data.questions[0].question);
+    return data.questions[0];
 
 
 }
 
 function showQuestion (questionData) {
-    playerQuestionText.innerHTML = questionData
+    playerQuestionText.innerHTML = questionData.question;
 
 }
+
